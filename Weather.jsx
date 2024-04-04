@@ -1,42 +1,41 @@
 import React, { useState } from 'react'
 import './Weather.css'
 const api={
-  key:"51c72d67165d4542032722b26613af76",//api key
-  base:"https://api.openweathermap.org/data/2.5/"//for weather
+  key:"51c72d67165d4542032722b26613af76",
+  base:"https://api.openweathermap.org/data/2.5/"
 };
 const Weather = () => {
-  const [query,setQuery]=useState('');//takes the current state of input and updates the input
-  const [weather,setWeather]=useState({});//api generated data is stored in setweather
+  const [query,setQuery]=useState('');
+  const [weather,setWeather]=useState({});
   const search= event =>{
-  if(event.key==="Enter"){//if you click on enter
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)//fetching data from the key
-      .then(response=>response.json())//converting data to json
-      .then(data=>{//jo data aaya
-        setWeather(data);//use setweather me update krdo
-        setQuery('');//ab kyuki data mil gya hai to query me jo input tha use khaali krdo
+  if(event.key==="Enter"){//if enter is pressed then the key is fetched andconverted to json
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      .then(response=>response.json())
+      .then(data=>{
+        setWeather(data);
+        setQuery('');
         console.log(data)
         document.querySelector(".back").style.display='none';
       })
   }
   } 
-              //object bnaya
+            
 const datebuilder=(d)=>{
   let months= ["January","February","March","April","May","June","July","August","September","October","November","December"];
   let days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-  let day=days[d.getDay()];//getday 0 se 6 index deta hai to days me koi ek milega
-  let date=d.getDate();//date 1 to 31
-  let month=months[d.getMonth()];//0 se 11 tk months array me se nikaal lega
-  let year=d.getFullYear();// 4 digit year
+  let day=days[d.getDay()];
+  let date=d.getDate();
+  let month=months[d.getMonth()];
+  let year=d.getFullYear();
 
   return `${day} ${date} ${month} ${year} `;
 }
 function searchit(){
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)//fetching data from the key
   .then(response=>response.json())//converting data to json
-  .then(data=>{//jo data aaya
-    setWeather(data);//use setweather me update krdo
-    setQuery('');})
-   
+  .then(data=>{
+    setWeather(data);
+    setQuery('');})  
 }
   return (
     
@@ -44,7 +43,7 @@ function searchit(){
    <div  className={(typeof weather.main !="undefined")?((weather.weather[0].main==="Haze")? 'warm':'cold'):'app'}>
     <main>
   <div className="searchbox w-5/6  mx-auto flex">
-    <input type="text" placeholder='Search for a city' className='searchbar mt-8 h-10 w-11/12 rounded-xl border-2 border-gray-400' value={query}//input ke andar store hoga
+    <input type="text" placeholder='Search for a city' className='searchbar mt-8 h-10 w-11/12 rounded-xl border-2 border-gray-400' value={query}
     onChange={e=>setQuery(e.target.value)} onKeyPress={search}/>
    <button onClick={searchit} > <img className='h-10 w-12 ml-10 mt-8' src="https://cdn0.iconfinder.com/data/icons/it-hardware/100/search-512.png" alt="" /></button>
   </div>
@@ -54,7 +53,7 @@ function searchit(){
         iramsej-2400.png&ehk=MvpDnvQs0Z%2fpiRhX0yL4cA3xW%2bv6tWr%2f5qG4CYvP0Mo%3d&risl=&pid=ImgRaw&r=0" alt="" />
       </div>
   <div className='flex rounded-4xl '> 
-  {(typeof weather.main !="undefined")?(// bahaut zruri line chaap lo
+  {(typeof weather.main !="undefined")?(
   <div className='infobox mx-auto mt-12'>
   <div className="locationbox mt-16 ">
     <div className="location text-white text-center">
