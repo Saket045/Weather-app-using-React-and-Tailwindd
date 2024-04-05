@@ -36,6 +36,7 @@ function searchit(){
   .then(data=>{
     setWeather(data);
     setQuery('');})  
+   document.querySelector(".back").style.display='none';
 }
   return (
     
@@ -69,7 +70,11 @@ function searchit(){
       {weather.weather[0].main}
     </div>
   </div>
-  </div>):('')}
+  </div>): <div  className ="back flex justify-around">
+        <h1 className='text-black-300 font-bold text-8xl pt-12 w-6/12 font-sans'>Type the name<br /><span className='text-gray-500'>of the city</span></h1>
+        <img className='w-4/12 ' src="https://th.bing.com/th/id/R.f521a5dc7644d4eae779faa2b617e9d1?rik=MtinExjnCQ%2bJTA&riu=http%3a%2f%2pluspng.com%2fimg-png%2fpng-sun-and-clouds-sun-behind-the-cloud-clipart-by-
+        iramsej-2400.png&ehk=MvpDnvQs0Z%2fpiRhX0yL4cA3xW%2bv6tWr%2f5qG4CYvP0Mo%3d&risl=&pid=ImgRaw&r=0" alt="" />
+      </div>}
   </div>
 </main>
     </div>
